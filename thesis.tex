@@ -1,0 +1,181 @@
+\documentclass[a4paper,twoside,openleft,12pt]{filipecorreiathesis} % define the title 
+\usepackage[a4paper,margin=2.5cm, top=3cm, bottom=3cm]{geometry} % use bindingoffset=2cm for binding
+\usepackage{appendix}
+\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts, amssymb, amsthm, mathrsfs}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{setspace} 
+\usepackage{xspace}
+\usepackage{algorithm, algorithmicx, algpseudocode}
+\usepackage{rotating}
+\usepackage{courier}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{bookmark}
+\usepackage[ISBN=555-555-555-555-0,SC0]{ean13isbn}
+\usepackage{wrapfig}
+\usepackage{soul} % provides yellow-marker highlighting among other features
+\usepackage{verbatim} % provides the 'comment' environment among other features
+\usepackage{xifthen} % provides \ifthenelse 
+
+\usepackage{enumitem}
+\usepackage{pbox}
+\usepackage[section]{placeins} % stops floats (figures, tables...) to appear outside the section where they are placed.
+\usepackage{cleveref}[2012/02/15]
+
+\usepackage{longtable}
+\usepackage{subcaption}
+
+\usepackage{calligra}
+\newcommand{\setfont}[2]{{\fontfamily{#1}\selectfont #2}}
+
+
+\makeindex
+
+% dividing diamonds
+\newcommand{\dividingdiamonds}{\vspace{0.2cm}\centerline{$\diamond \diamond \diamond$}\vspace{0.2cm}}%
+
+
+%\onehalfspacing
+\setstretch{1.3} % for custom spacing
+
+% indentation of multiline figure/table captions.
+%\usepackage[format=plain,justification=RaggedRight]{caption}
+
+% Vertically centered table columns
+\newcolumntype{M}{>{\centering\arraybackslash}m{\dimexpr.25\linewidth-2\tabcolsep}}
+
+%% Fixes problem with bibliograpy key protruding into description
+\usepackage{eqparbox}
+\usepackage[numbers]{natbib}
+\renewcommand*{\bibnumfmt}[1]{\eqparbox[t]{bblnm}{[\textcolor{feup}{#1}]}}
+
+\def\isnum#1{%
+  \if!\ifnum9<1#1!\else_\fi
+    \oldstylenums{#1}\else#1\fi}
+
+%% Fancy Headers -- Somehow, I can't seem to be able to move this to the .cls file
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small \leavevmode\llap{\textcolor{feup}{\isnum{\thepage}}\hspace{0.5cm}}\smallcaps{\leftmark}}
+\fancyhead[RO]{\small \leavevmode\smallcaps{\rightmark}\rlap{\hspace{0.5cm}\textcolor{feup}{\isnum{\thepage}}}}
+\fancypagestyle{plain} {
+ \fancyhf{} % get rid of headers on plain pages
+ \renewcommand{\headrulewidth}{0pt} % and the line
+ \renewcommand{\footrulewidth}{0pt} % and the line
+}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength\headsep{1.1cm}
+\setlength\headheight{13.6pt}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\usepackage{url}
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\footnotesize\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+%\usepackage{inconsolata} % monospace font, used for \texttt{}
+
+
+\begin{document}
+	\title{Thesis title}
+	\author{\href{mailto:your-email-address@fe.up.pt}{Your Full Name}}
+
+	\frontmatter
+	    \pagestyle{empty}
+	    \maketitle
+		\input{00-colophon}
+		\cleardoublepage
+		\input{00-dedication}
+		\clearpage
+		{\centering \emph{This page was intentionally left blank.} \\ }
+		\dominitoc
+		\cleardoublepage
+		\pagenumbering{roman}
+		\pagestyle{fancy}
+		\include{00-abstract}
+		\addtocontents{toc}{\protect{\pdfbookmark[0]{\contentsname}{toc}}}
+		\tableofcontents
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{\listfigurename}
+		\listoffigures
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{\listtablename}
+		\listoftables
+		\cleardoublepage
+		\include{00-preface}
+
+	\mainmatter
+
+	% final lineup
+	\include{introduction}
+	%\include{state-of-the-art-review}
+	%\include{problem}
+	%\include{contribution1}
+	%\include{contribution2}
+	%\include{validation}
+	\include{conclusions}
+
+	\include{epilogue}
+
+
+    \bookmarksetup{startatroot}
+	\phantomsection
+	\addcontentsline{toc}{part}{\appendixtocname}
+	\appendixpage
+	\appendix
+		\include{appendix1}
+		%\include{appendix2}
+
+
+
+	% seealso index entries (must come after all other \index calls, so that they appear as the last subitems on index entries)
+	%\index{knowledge!capture|seealso{expressiveness}}
+	%\index{information|seealso{knowledge, capture}}
+
+	
+	\bookmarksetup{startatroot}
+	\backmatter
+		\cleardoublepage
+		\include{publications}
+
+
+		% Glossary
+		%\cleardoublepage
+		%\phantomsection
+		%\begin{singlespace}
+		%\begin{footnotesize}
+		%\addcontentsline{toc}{chapter}{Nomenclature}
+		%\markboth{Nomenclature}{Nomenclature}
+		%\makenomenclature
+		%\input{nomenclature}
+		%\printnomenclature[4.5cm]
+		%\end{footnotesize}
+		%\end{singlespace}
+
+		% Bibliography / References
+		\cleardoublepage
+		\phantomsection
+		\begin{singlespace}
+		\begin{footnotesize}
+		\addcontentsline{toc}{chapter}{References}
+		\bibliographystyle{amsalpha}
+		\renewcommand{\bibname}{References}
+		\bibliography{references}
+		\end{footnotesize}
+		\end{singlespace}
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{Index}
+		\printindex
+\end{document}
